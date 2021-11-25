@@ -17,7 +17,9 @@ defmodule RssixWeb.Router do
   scope "/", RssixWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", IndexLive
+
+    # get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
