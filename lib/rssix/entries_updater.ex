@@ -28,20 +28,11 @@ defmodule Rssix.EntriesUpdater do
     |> Enum.map(fn source ->
       case Rssix.Scraper.scrape(source.url) do
         {:ok, parsed_entries} ->
-          IO.puts("got response " <> source.url)
-
-          try do
-            parsed_entries
-            |> Enum.map(fn e ->
-              IO.inspect(e)
-              Rssix.Entries.Entry.changeset(%Rssix.Entries.Entry{}, e)
-            end)
-            |> Enum.map(&Rssix.Repo.insert(&1))
-          rescue
-            e ->
-              IO.puts("failed to insert entries for " <> source.url)
-              IO.inspect(e)
-          end
+          parsed_entries
+          |> Enum.map(fn e ->
+            Rssix.Entries.Entry.changeset(%Rssix.Entries.Entry{}, e)
+          end)
+          |> Enum.map(&Rssix.Repo.insert(&1))
 
         {:error, error} ->
           IO.puts("error getting " <> source.url)
@@ -58,15 +49,23 @@ defmodule Rssix.EntriesUpdater do
   def handle_info({:fetch, url}, state) do
     case Rssix.Scraper.scrape(url) do
       {:ok, parsed_entries} ->
-        IO.puts("got response " <> url)
-
         try do
           parsed_entries
           |> Enum.map(fn e ->
             IO.inspect(e)
             Rssix.Entries.Entry.changeset(%Rssix.Entries.Entry{}, e)
           end)
-          |> Enum.map(&Rssix.Repo.insert(&1))
+          |> Enum.map(fn c ->
+            case Rssix.Repo.insert(c) do
+              {:ok, r} ->
+                IO.puts("add entry successful")
+                IO.inspect(r)
+
+              {:error, e} ->
+                IO.puts("add entry failed")
+                IO.inspect(e)
+            end
+          end)
         rescue
           e ->
             IO.puts("failed to insert entries for " <> url)
