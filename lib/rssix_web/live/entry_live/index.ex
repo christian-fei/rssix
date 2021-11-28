@@ -6,7 +6,7 @@ defmodule RssixWeb.EntryLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :entries, list_entries())}
+    {:ok, assign(socket, :entries, list_unread_entries())}
   end
 
   @impl true
@@ -37,10 +37,20 @@ defmodule RssixWeb.EntryLive.Index do
     entry = Entries.get_entry!(id)
     {:ok, _} = Entries.delete_entry(entry)
 
-    {:noreply, assign(socket, :entries, list_entries())}
+    {:noreply, assign(socket, :entries, list_unread_entries())}
   end
 
-  defp list_entries do
-    Entries.list_entries()
+  def handle_event("read", %{"id" => id}, socket) do
+    {:ok, _} = Rssix.Entries.read_entry(id)
+
+    {:noreply, assign(socket, :entries, last_10_unread_entries())}
+  end
+
+  defp list_unread_entries do
+    Entries.list_unread_entries()
+  end
+
+  defp last_10_unread_entries do
+    Rssix.Entries.last_10_unread_entries()
   end
 end

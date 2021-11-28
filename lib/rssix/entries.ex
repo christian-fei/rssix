@@ -8,28 +8,46 @@ defmodule Rssix.Entries do
 
   alias Rssix.Entries.Entry
 
+  # defp unread do
+  #   where(read: false)
+  # end
+
   @doc """
   Returns the list of entries.
 
   ## Examples
 
-      iex> list_entries()
+      iex> list_unread_entries()
       [%Entry{}, ...]
 
   """
+  def list_unread_entries do
+    from(e in Entry, where: e.read == false)
+    |> order_by({:desc, :read})
+    |> Repo.all()
+  end
+
+  def last_10_unread_entries do
+    from(e in Entry, where: e.read == false)
+    |> order_by({:desc, :read})
+    |> limit(10)
+    |> Repo.all()
+  end
+
   def list_entries do
     Repo.all(Entry)
+    |> order_by({:desc, :read})
   end
 
   def last_10_entries do
-    Repo.all(Entry |> limit(10))
+    Repo.all(Entry)
+    |> order_by({:desc, :read})
+    |> limit(10)
   end
 
   def read_entry(id) do
     entry = Repo.get!(Entry, id)
-    # Repo.update(Entry, %Entry{entry | read: true})
-    # Repo.update(Entry, %Entry{entry})
-    {:ok, entry}
+    Repo.update(Entry.changeset(entry, %{read: true}))
   end
 
   @doc """

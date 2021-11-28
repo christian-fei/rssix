@@ -10,9 +10,9 @@ defmodule Rssix.EntriesTest do
 
     @invalid_attrs %{content: nil, title: nil, url: nil}
 
-    test "list_entries/0 returns all entries" do
+    test "list_unread_entries/0 returns all entries" do
       entry = entry_fixture()
-      assert Entries.list_entries() == [entry]
+      assert Entries.list_unread_entries() == [entry]
     end
 
     test "get_entry!/1 returns the entry with given id" do

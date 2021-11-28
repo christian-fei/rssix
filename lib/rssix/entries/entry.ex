@@ -6,6 +6,7 @@ defmodule Rssix.Entries.Entry do
     field :content, :string
     field :title, :string
     field :url, :string
+    field :read, :boolean, default: false
 
     timestamps()
   end
@@ -13,7 +14,7 @@ defmodule Rssix.Entries.Entry do
   @doc false
   def changeset(entry, attrs) do
     entry
-    |> cast(attrs, [:title, :url, :content])
+    |> cast(attrs, [:title, :url, :content, :read])
     |> unique_constraint(:url)
     |> validate_required([:title, :url])
   end

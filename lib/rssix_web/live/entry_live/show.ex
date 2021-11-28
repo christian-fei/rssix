@@ -10,6 +10,8 @@ defmodule RssixWeb.EntryLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
+    Rssix.Entries.read_entry(id)
+
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))

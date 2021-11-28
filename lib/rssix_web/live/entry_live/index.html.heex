@@ -17,6 +17,7 @@
         <span><%= live_redirect "Show", to: Routes.entry_show_path(@socket, :show, entry) %></span>
         <span><%= live_patch "Edit", to: Routes.entry_index_path(@socket, :edit, entry) %></span>
         <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: entry.id, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Read", to: "#", phx_click: "read", phx_value_id: entry.id, data: [] %></span>
       </div>
       <div><%= #raw entry.content |> String.slice(0..500) %></div>
     </div>
