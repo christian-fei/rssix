@@ -1,19 +1,49 @@
 # Rssix
 
-To start your Phoenix server:
+> Personal RSS reader, but BEAM-flavoured
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+# setup
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+```sh
+mix deps.get
+```
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+start postgres:
 
-## Learn more
+```sh
+docker run -v $PWD/data:/var/lib/postgresql/data --rm --name postgres-db -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+# or
+
+./start-pg # runs above command
+```
+
+the setup ecto:
+
+```sh
+mix ecto.setup
+```
+
+and run phoenix:
+
+```sh
+iex -S mix phx.server
+```
+
+visit [`localhost:4000`](http://localhost:4000)
+
+# other info
+
+to stop postgres, run
+
+```sh
+docker stop postgres-db
+```
+
+# Learn more
+
+- Official website: https://www.phoenixframework.org/
+- Guides: https://hexdocs.pm/phoenix/overview.html
+- Docs: https://hexdocs.pm/phoenix
+- Forum: https://elixirforum.com/c/phoenix-forum
+- Source: https://github.com/phoenixframework/phoenix
