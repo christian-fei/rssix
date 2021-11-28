@@ -9,6 +9,7 @@ defmodule Rssix.Repo.Migrations.CreateEntries do
 
       timestamps()
     end
+
     create unique_index(:entries, [:url])
   end
 end

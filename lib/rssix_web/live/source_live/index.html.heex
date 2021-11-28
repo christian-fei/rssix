@@ -22,7 +22,9 @@
     <%= for source <- @sources do %>
       <tr id={"source-#{source.id}"}>
         <td><%= source.title %></td>
-        <td><%= source.url %></td>
+        <td><a target="_blank" href={source.url}><%= source.url %></a></td>
+    
+
 
         <td>
           <span><%= live_redirect "Show", to: Routes.source_show_path(@socket, :show, source) %></span>

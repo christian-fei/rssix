@@ -35,7 +35,12 @@ defmodule Rssix.EntriesTest do
 
     test "update_entry/2 with valid data updates the entry" do
       entry = entry_fixture()
-      update_attrs = %{content: "some updated content", title: "some updated title", url: "some updated url"}
+
+      update_attrs = %{
+        content: "some updated content",
+        title: "some updated title",
+        url: "some updated url"
+      }
 
       assert {:ok, %Entry{} = entry} = Entries.update_entry(entry, update_attrs)
       assert entry.content == "some updated content"

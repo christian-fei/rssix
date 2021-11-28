@@ -20,7 +20,7 @@ defmodule RssixWeb.EntryLiveTest do
   describe "Index" do
     setup [:create_entry]
 
-    test "lists all entries", %{conn: conn, entry: entry} do
+    test "lists all entries", %{conn: conn, entry: _entry} do
       {:ok, _index_live, html} = live(conn, Routes.entry_index_path(conn, :index))
 
       assert html =~ "Listing Entries"
