@@ -50,8 +50,14 @@ docker stop postgres-db
 
 # notes
 
-add sources with 
+added sources with 
 
 ```sh
 mix phx.gen.live Sources Source sources title:string url:string
+```
+
+added entries with
+
+```sh
+mix phx.gen.live Entries Entry entries title:string url:string content:string
 ```
