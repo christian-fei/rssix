@@ -15,7 +15,7 @@ defmodule Rssix.RssParserTest do
   test "parses feed with items" do
     assert [
              %{
-               content: "Some description",
+               content: "Some content",
                title: "Some ttle",
                url: "https://example.com/post/"
              }
@@ -51,11 +51,11 @@ defmodule Rssix.RssParserTest do
     <rss version="2.0">
       <channel>
         <title>example title</title>
-        <description>example description</description>
+        <description>some description</description>
         <link>https://example.com/</link>
           <item>
             <title>Some ttle</title>
-            <description>Some description</description>
+            <description>Some content</description>
             <pubDate>27 Nov 2021 12:39:42 +0000</pubDate>
             <link>https://example.com/post/</link>
             <guid>https://example.com/post/</guid>
