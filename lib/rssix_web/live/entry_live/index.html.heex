@@ -18,7 +18,7 @@
         <span><%= live_patch "Edit", to: Routes.entry_index_path(@socket, :edit, entry) %></span>
         <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: entry.id, data: [confirm: "Are you sure?"] %></span>
       </div>
-      <div><%= raw entry.content |> String.slice(0..500) %></div>
+      <div><%= #raw entry.content |> String.slice(0..500) %></div>
     </div>
   <% end %>
 </table>

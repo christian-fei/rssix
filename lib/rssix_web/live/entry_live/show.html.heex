@@ -1,5 +1,3 @@
-<h1>Show Entry</h1>
-
 <%= if @live_action in [:edit] do %>
   <%= live_modal RssixWeb.EntryLive.FormComponent,
     id: @entry.id,
@@ -9,24 +7,17 @@
     return_to: Routes.entry_show_path(@socket, :show, @entry) %>
 <% end %>
 
-<ul>
+<div>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @entry.title %>
-  </li>
+  <h1><%= @entry.title %></h1>
 
-  <li>
-    <strong>Url:</strong>
-    <%= @entry.url %>
-  </li>
+  <%= @entry.url %>
 
-  <li>
-    <strong>Content:</strong>
-    <%= @entry.content %>
-  </li>
+  <div id="content">
+  <%= raw @entry.content %>
+  </div>
 
-</ul>
+</div>
 
 <span><%= live_patch "Edit", to: Routes.entry_show_path(@socket, :edit, @entry), class: "button" %></span> |
 <span><%= live_redirect "Back", to: Routes.entry_index_path(@socket, :index) %></span>
