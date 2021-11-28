@@ -47,3 +47,11 @@ docker stop postgres-db
 - Docs: https://hexdocs.pm/phoenix
 - Forum: https://elixirforum.com/c/phoenix-forum
 - Source: https://github.com/phoenixframework/phoenix
+
+# notes
+
+add sources with 
+
+```sh
+mix phx.gen.live Sources Source sources title:string url:string
+```

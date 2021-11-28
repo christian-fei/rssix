@@ -1,0 +1,27 @@
+<h1>Show Source</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal RssixWeb.SourceLive.FormComponent,
+    id: @source.id,
+    title: @page_title,
+    action: @live_action,
+    source: @source,
+    return_to: Routes.source_show_path(@socket, :show, @source) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @source.title %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @source.url %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.source_show_path(@socket, :edit, @source), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.source_index_path(@socket, :index) %></span>
