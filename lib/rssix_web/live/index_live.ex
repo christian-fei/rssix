@@ -1,7 +1,5 @@
 defmodule RssixWeb.IndexLive do
-  # If you generated an app with mix phx.new --live,
-  # the line below would be: use RssixWeb, :live_view
-  use Phoenix.LiveView
+  use RssixWeb, :live_view
 
   # def render(assigns) do
   #   ~H"""
@@ -11,6 +9,10 @@ defmodule RssixWeb.IndexLive do
 
   def mount(_params, _session, socket) do
     # {:ok, assign(socket, :temperature, temperature)}
-    {:ok, socket}
+    {:ok, assign(socket, :entries, list_entries())}
+  end
+
+  defp list_entries do
+    Rssix.Entries.list_entries()
   end
 end

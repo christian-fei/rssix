@@ -21,6 +21,10 @@ defmodule Rssix.Entries do
     Repo.all(Entry)
   end
 
+  def last_10_entries do
+    Repo.all(Entry |> limit(10))
+  end
+
   @doc """
   Gets a single entry.
 
