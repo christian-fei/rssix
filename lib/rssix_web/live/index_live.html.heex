@@ -1,11 +1,13 @@
 <table>
   <%= for entry <- @entries do %>
-    <div id={"entry-#{entry.id}"}>
-      <h1><%= entry.title %></h1>
-      <a href={entry.url}><%= entry.url %></a>
+    <div id={"entry-#{entry.id}"} class="list-entry">
+      <h4>
+      <%= live_redirect entry.title, to: Routes.entry_show_path(@socket, :show, entry) %>
+      </h4>
       <div>
-        <span><%= live_redirect "Show", to: Routes.entry_show_path(@socket, :show, entry) %></span>
         <span><%= link "Read", to: "#", phx_click: "read", phx_value_id: entry.id, data: [] %></span>
+        <span><%= live_redirect "Show", to: Routes.entry_show_path(@socket, :show, entry) %></span>
+        <a href={entry.url}><%= entry.url |> String.split("/") |> Enum.at(2) %></a>
       </div>
       <div><%= #raw entry.content |> String.slice(0..500) %></div>
     </div>
