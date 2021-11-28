@@ -9,10 +9,10 @@ defmodule RssixWeb.IndexLive do
 
   def mount(_params, _session, socket) do
     # {:ok, assign(socket, :temperature, temperature)}
-    {:ok, assign(socket, :entries, list_entries())}
+    {:ok, assign(socket, :entries, last_10_entries())}
   end
 
-  defp list_entries do
-    Rssix.Entries.list_entries()
+  defp last_10_entries do
+    Rssix.Entries.last_10_entries()
   end
 end
