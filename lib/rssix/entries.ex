@@ -25,6 +25,13 @@ defmodule Rssix.Entries do
     Repo.all(Entry |> limit(10))
   end
 
+  def read_entry(id) do
+    entry = Repo.get!(Entry, id)
+    # Repo.update(Entry, %Entry{entry | read: true})
+    # Repo.update(Entry, %Entry{entry})
+    {:ok, entry}
+  end
+
   @doc """
   Gets a single entry.
 
