@@ -26,7 +26,10 @@ defmodule Rssix.EntriesUpdater do
 
     sources
     |> Enum.map(fn source ->
-      case Rssix.Scraper.scrape(source.url) do
+      t = Task.async(fn -> Rssix.Scraper.scrape(source.url) end)
+      result = Task.await(t, 30_000)
+
+      case result do
         {:ok, parsed_entries} ->
           parsed_entries
           |> Enum.map(fn e ->
