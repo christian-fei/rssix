@@ -14,10 +14,7 @@ defmodule Rssix.EntriesUpdater do
 
     Process.send(self(), :fetch_all, [])
 
-    {:ok,
-     %{
-       entries: []
-     }}
+    {:ok, %{}}
   end
 
   @impl true
@@ -26,9 +23,7 @@ defmodule Rssix.EntriesUpdater do
 
     sources
     |> Enum.map(fn source ->
-      t = Task.async(fn -> Rssix.Scraper.scrape(source.url) end)
-
-      case Task.await(t, 30_000) do
+      case Rssix.Scraper.scrape(source.url) do
         {:ok, parsed_entries} ->
           parsed_entries
           |> Enum.map(fn e ->
