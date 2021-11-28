@@ -15,6 +15,6 @@ defmodule Rssix.Entries.Entry do
     entry
     |> cast(attrs, [:title, :url, :content])
     |> unique_constraint(:url)
-    |> validate_required([:title, :url, :content])
+    |> validate_required([:title, :url])
   end
 end

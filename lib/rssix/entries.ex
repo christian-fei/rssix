@@ -101,4 +101,12 @@ defmodule Rssix.Entries do
   def change_entry(%Entry{} = entry, attrs \\ %{}) do
     Entry.changeset(entry, attrs)
   end
+
+  # def count(entry_id: entry_id) do
+  #   query =
+  #     from entry in Entry,
+  #       where: entry.user_id == ^user_id
+
+  #   Repo.aggregate(query, :sum, :amount)
+  # end
 end

@@ -40,6 +40,13 @@ defmodule RssixWeb.SourceLive.Index do
     {:noreply, assign(socket, :sources, list_sources())}
   end
 
+  @impl true
+  def handle_event("scrape", %{"url" => url}, socket) do
+    Process.send(Rssix.EntriesUpdater, {:fetch, url}, [])
+
+    {:noreply, socket}
+  end
+
   defp list_sources do
     Sources.list_sources()
   end

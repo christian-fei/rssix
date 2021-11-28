@@ -28,6 +28,7 @@
           <span><%= live_redirect "Show", to: Routes.source_show_path(@socket, :show, source) %></span>
           <span><%= live_patch "Edit", to: Routes.source_index_path(@socket, :edit, source) %></span>
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: source.id, data: [confirm: "Are you sure?"] %></span>
+          <span><%= link "Scrape", to: "#", phx_click: "scrape", phx_value_url: source.url, data: [confirm: "Start scraping"] %></span>
         </td>
       </tr>
     <% end %>
