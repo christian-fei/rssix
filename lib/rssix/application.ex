@@ -15,7 +15,8 @@ defmodule Rssix.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Rssix.PubSub},
       # Start the Endpoint (http/https)
-      RssixWeb.Endpoint
+      RssixWeb.Endpoint,
+      Rssix.EntriesUpdater
       # Start a worker by calling: Rssix.Worker.start_link(arg)
       # {Rssix.Worker, arg}
     ]

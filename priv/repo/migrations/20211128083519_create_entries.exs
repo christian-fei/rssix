@@ -5,9 +5,10 @@ defmodule Rssix.Repo.Migrations.CreateEntries do
     create table(:entries) do
       add :title, :string
       add :url, :string
-      add :content, :string
+      add :content, :text
 
       timestamps()
     end
+    create unique_index(:entries, [:url])
   end
 end
