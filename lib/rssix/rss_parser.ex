@@ -1,6 +1,7 @@
 defmodule Rssix.RssParser do
   import SweetXml, only: [xpath: 2, xpath: 3, sigil_x: 2]
 
+  @spec parse_body(any) :: list
   def parse_body(xml) do
     parsed = SweetXml.parse(xml)
     items_count = parsed |> xpath(~x"//item"l) |> Enum.count()

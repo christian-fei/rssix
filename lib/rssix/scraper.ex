@@ -7,13 +7,8 @@ defmodule Rssix.Scraper do
   defp do_scrape(url) do
     case Tesla.get(url) do
       {:ok, response} ->
-        case Rssix.RssParser.parse_body(response.body) do
-          nil ->
-            {:error, :unsupported}
-
-          parsed_entries ->
-            {:ok, parsed_entries}
-        end
+        IO.puts("success scraping " <> url)
+        Rssix.RssParser.parse_body(response.body)
 
       {:error, error} ->
         IO.puts("error getting " <> url)
