@@ -10,7 +10,6 @@
 <div>
   <div>
     <span><%= live_patch "Edit", to: Routes.entry_show_path(@socket, :edit, @entry), class: "button" %></span> |
-    <span><%= live_redirect "Back", to: Routes.entry_index_path(@socket, :index) %></span>
   </div>
 
   <h1><%= @entry.title %></h1>
@@ -26,16 +25,16 @@
 <table>
   <%= for entry <- @entries do %>
     <div id={"entry-#{entry.id}"} class="list-entry">
-      <h4>
-      <%= live_redirect entry.title, to: Routes.entry_show_path(@socket, :show, entry) %>
-      </h4>
       <div>
         <span><%= link "Read", to: "#", phx_click: "read", phx_value_id: entry.id, data: [] %></span>
         <span><%= live_redirect "Show", to: Routes.entry_show_path(@socket, :show, entry) %></span>
         <span><%= live_patch "Edit", to: Routes.entry_index_path(@socket, :edit, entry) %></span>
         <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: entry.id, data: [confirm: "Are you sure?"] %></span>
-      <a href={entry.url}><%= entry.url |> String.split("/") |> Enum.at(2) %></a>
+        <a href={entry.url}><%= entry.url |> String.split("/") |> Enum.at(2) %></a>
       </div>
+      <h4>
+      <%= live_redirect entry.title, to: Routes.entry_show_path(@socket, :show, entry) %>
+      </h4>
       <div><%= #raw entry.content |> String.slice(0..500) %></div>
     </div>
   <% end %>

@@ -2,6 +2,7 @@ defmodule RssixWeb.SourceLive.Show do
   use RssixWeb, :live_view
 
   alias Rssix.Sources
+  # alias Rssix.Entries
 
   @impl true
   def mount(_params, _session, socket) do
@@ -13,6 +14,8 @@ defmodule RssixWeb.SourceLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
+    #  |> assign(:entries, Entries!(id))
+     |> assign(:entries, [])
      |> assign(:source, Sources.get_source!(id))}
   end
 
