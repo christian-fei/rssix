@@ -3,6 +3,7 @@ defmodule RssixWeb.SourceLive.Index do
 
   alias Rssix.Sources
   alias Rssix.Sources.Source
+import Ecto.Query
 
   @impl true
   def mount(_params, _session, socket) do
@@ -42,7 +43,8 @@ defmodule RssixWeb.SourceLive.Index do
 
   @impl true
   def handle_event("scrape", %{"url" => url}, socket) do
-    Process.send(Rssix.EntriesUpdater, {:fetch, url}, [])
+    source = Rssix.Repo.one!(from s in Rssix.Sources.Source, where: s.url == ^url)
+    Process.send(Rssix.EntriesUpdater, {:fetch, url, source.id}, [])
 
     {:noreply, socket}
   end

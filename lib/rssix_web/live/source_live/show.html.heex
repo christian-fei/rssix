@@ -26,7 +26,7 @@
 <span><%= live_patch "Edit", to: Routes.source_show_path(@socket, :edit, @source), class: "button" %></span>
 
 <table>
-  <%= for entry <- @entries do %>
+  <%= for entry <- @source.entries do %>
     <div id={"entry-#{entry.id}"} class="list-entry">
       <h4>
       <%= live_redirect entry.title, to: Routes.entry_show_path(@socket, :show, entry) %>

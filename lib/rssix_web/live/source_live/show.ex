@@ -14,9 +14,7 @@ defmodule RssixWeb.SourceLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-    #  |> assign(:entries, Entries!(id))
-     |> assign(:entries, [])
-     |> assign(:source, Sources.get_source!(id))}
+     |> assign(:source, Sources.get_source_with_entries!(id))}
   end
 
   defp page_title(:show), do: "Show Source"

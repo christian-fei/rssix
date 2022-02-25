@@ -27,7 +27,7 @@ defmodule Rssix.EntriesUpdater do
         {:ok, parsed_entries} ->
           parsed_entries
           |> Enum.map(fn e ->
-            Rssix.Entries.Entry.changeset(%Rssix.Entries.Entry{}, e)
+            Rssix.Entries.Entry.changeset(%Rssix.Entries.Entry{source: source}, e)
           end)
           |> Enum.map(&Rssix.Repo.insert(&1))
 
@@ -43,20 +43,18 @@ defmodule Rssix.EntriesUpdater do
   end
 
   @impl true
-  def handle_info({:fetch, url}, state) do
+  def handle_info({:fetch, url, source_id}, state) do
     case Rssix.Scraper.scrape(url) do
       {:ok, parsed_entries} ->
         try do
           parsed_entries
           |> Enum.map(fn e ->
-            IO.inspect(e)
-            Rssix.Entries.Entry.changeset(%Rssix.Entries.Entry{}, e)
+            Rssix.Entries.Entry.changeset(%Rssix.Entries.Entry{source_id: source_id}, e)
           end)
           |> Enum.map(fn c ->
             case Rssix.Repo.insert(c) do
-              {:ok, r} ->
+              {:ok, _} ->
                 IO.puts("add entry successful")
-                IO.inspect(r)
 
               {:error, e} ->
                 IO.puts("add entry failed")
